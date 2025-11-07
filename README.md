@@ -6,9 +6,6 @@ A fast, efficient command-line tool for managing files between your AI Platform 
 
 - **Simple git-like commands** - Familiar `ls`, `pull`, `push` interface
 - **Fast uploads** - 10 parallel threads for files larger than 16MB
-- **Progress tracking** - Real-time progress for large files
-- **Smart syncing** - Only transfers new or modified files
-- **No dependencies** - Single binary, no external tools required
 
 ## Quick Start
 
@@ -279,10 +276,7 @@ Works with any S3-compatible storage:
 - VNG Cloud vStorage
 - MinIO
 - Amazon S3
-- DigitalOcean Spaces
-- Backblaze B2
-- Wasabi
-- And more
+
 
 ## Support
 
