@@ -11,6 +11,9 @@
 # Test binary, built with `go test -c`
 *.test
 
+# Built binary
+aiplatform-util
+
 # Code coverage profiles and other test artifacts
 *.out
 coverage.*
@@ -23,9 +26,13 @@ profile.cov
 # Go workspace file
 go.work
 go.work.sum
+.claude.md 
 
 # env file
 .env
+
+# Test directory
+test/
 
 # Editor/IDE
 # .idea/
