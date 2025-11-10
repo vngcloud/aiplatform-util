@@ -11,21 +11,31 @@ A fast, efficient command-line tool for managing files between your AI Platform 
 
 ### 1. Download
 
-Choose your platform:
-
 ```bash
-# Linux
-curl -L https://github.com/vngcloud/aiplatform-util/releases/latest/download/aiplatform-util-linux-amd64 -o aiplatform-util
-chmod +x aiplatform-util
-sudo mv aiplatform-util /usr/local/bin/
-
-# macOS
-curl -L https://github.com/vngcloud/aiplatform-util/releases/latest/download/aiplatform-util-darwin-amd64 -o aiplatform-util
+# Linux (x86_64)
+curl -L https://github.com/vngcloud/aiplatform-util/releases/latest/download/aiplatform-util_Linux_x86_64.tar.gz | tar xz
 chmod +x aiplatform-util
 sudo mv aiplatform-util /usr/local/bin/
 ```
 
-### 2. Set Environment Variables
+### 2. Configure Credentials
+
+You can configure credentials in two ways:
+
+**Option 1: Pre-Configuration Files in notebook AIPlatform VNGcloud **
+
+Create files in `/etc/config-nv/`:
+
+```bash
+# These files are typically pre-mounted in AI Platform notebook environments
+cat /etc/config-nv/AWS_ACCESS_KEY_ID
+cat /etc/config-nv/AWS_SECRET_ACCESS_KEY
+cat /etc/config-nv/AWS_ENDPOINT
+cat /etc/config-nv/S3_BUCKET
+cat /etc/config-nv/MOUNT_PATH
+```
+
+**Option 2: Environment Variables**
 
 ```bash
 export AWS_ACCESS_KEY_ID=your_access_key
@@ -35,7 +45,7 @@ export S3_BUCKET=your-bucket-name
 export MOUNT_PATH=/workspace/  # Optional, defaults to ~/test/workspace
 ```
 
-> **Note:** These environment variables are typically pre-configured in AI Platform notebook environments.
+> **Priority:** Configuration files in `/etc/config-nv/` take precedence over environment variables.
 
 ### 3. Start Using
 
@@ -244,17 +254,29 @@ sudo mv aiplatform-util /usr/local/bin/
 
 ### "Access key ID you provided does not exist"
 
-Make sure your environment variables are set correctly:
+Make sure your credentials are configured correctly. Check both configuration files and environment variables:
+
 ```bash
+# Check configuration files
+cat /etc/config-nv/AWS_ACCESS_KEY_ID
+cat /etc/config-nv/AWS_SECRET_ACCESS_KEY
+cat /etc/config-nv/AWS_ENDPOINT
+
+# Or check environment variables
 echo $AWS_ACCESS_KEY_ID
 echo $AWS_SECRET_ACCESS_KEY
 echo $AWS_ENDPOINT
 ```
 
-### "S3_BUCKET environment variable is required"
+### "S3_BUCKET is required"
 
-Set the bucket name:
+Set the bucket name via configuration file or environment variable:
+
 ```bash
+# Option 1: Configuration file
+echo "your-bucket-name" > /etc/config-nv/S3_BUCKET
+
+# Option 2: Environment variable
 export S3_BUCKET=your-bucket-name
 ```
 

@@ -55,7 +55,7 @@ Examples:
 			if err != nil {
 				return fmt.Errorf("failed to list buckets: %w", err)
 			}
-			fmt.Println("Available buckets (set S3_BUCKET environment variable to select one):")
+			fmt.Println("Available buckets (set S3_BUCKET via /etc/config-nv/S3_BUCKET file or environment variable to select one):")
 			for _, bucket := range buckets {
 				fmt.Printf("  - %s (created: %s)\n", bucket.Name, bucket.CreationDate.Format("2006-01-02 15:04:05"))
 			}
@@ -131,7 +131,7 @@ Examples:
 
 		// Check bucket name is set
 		if cfg.BucketName == "" {
-			return fmt.Errorf("S3_BUCKET environment variable is required for pull operations")
+			return fmt.Errorf("S3_BUCKET is required for pull operations (set via /etc/config-nv/S3_BUCKET file or environment variable)")
 		}
 
 		// Create S3 client
@@ -212,7 +212,7 @@ Examples:
 
 		// Check bucket name is set
 		if cfg.BucketName == "" {
-			return fmt.Errorf("S3_BUCKET environment variable is required for push operations")
+			return fmt.Errorf("S3_BUCKET is required for push operations (set via /etc/config-nv/S3_BUCKET file or environment variable)")
 		}
 
 		// Create S3 client
@@ -297,7 +297,7 @@ Examples:
 
 		// Check bucket name is set
 		if cfg.BucketName == "" {
-			return fmt.Errorf("S3_BUCKET environment variable is required for remove operations")
+			return fmt.Errorf("S3_BUCKET is required for remove operations (set via /etc/config-nv/S3_BUCKET file or environment variable)")
 		}
 
 		// Create S3 client
