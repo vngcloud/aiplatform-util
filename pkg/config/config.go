@@ -22,21 +22,25 @@ const (
 	configDir = "/etc/config-nv"
 )
 
-// getConfigValue attempts to read configuration from file first, then falls back to environment variable
+// getConfigValue attempts to read configuration from environment variable first, then falls back to file
 func getConfigValue(key string) string {
-	// Try to read from file in /etc/config-nv/
+	// Try to read from environment variable first
+	if envValue := os.Getenv(key); envValue != "" {
+		return envValue
+	}
+
+	// Fallback to file in /etc/config-nv/
 	filePath := fmt.Sprintf("%s/%s", configDir, key)
 	if data, err := os.ReadFile(filePath); err == nil {
 		// Trim whitespace and newlines from file content
 		return strings.TrimSpace(string(data))
 	}
 
-	// Fallback to environment variable
-	return os.Getenv(key)
+	return ""
 }
 
-// Load reads and validates configuration from /etc/config-nv/ files or environment variables
-// Priority: 1. Files in /etc/config-nv/ 2. Environment variables
+// Load reads and validates configuration from environment variables or /etc/config-nv/ files
+// Priority: 1. Environment variables 2. Files in /etc/config-nv/
 func Load() (*Config, error) {
 	mountPath := getConfigValue("MOUNT_PATH")
 	if mountPath == "" {

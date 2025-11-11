@@ -22,7 +22,17 @@ sudo mv aiplatform-util /usr/local/bin/
 
 You can configure credentials in two ways:
 
-**Option 1: Pre-Configuration Files in notebook AIPlatform VNGcloud **
+**Option 1: Environment Variables**
+
+```bash
+export AWS_ACCESS_KEY_ID=your_access_key
+export AWS_SECRET_ACCESS_KEY=your_secret_key
+export AWS_ENDPOINT=https://hcm04.vstorage.vngcloud.vn:443/
+export S3_BUCKET=your-bucket-name
+export MOUNT_PATH=/workspace/  # Optional, defaults to ~/test/workspace
+```
+
+**Option 2: Pre-Configuration Files in notebook AIPlatform VNGcloud**
 
 Create files in `/etc/config-nv/`:
 
@@ -35,17 +45,7 @@ cat /etc/config-nv/S3_BUCKET
 cat /etc/config-nv/MOUNT_PATH
 ```
 
-**Option 2: Environment Variables**
-
-```bash
-export AWS_ACCESS_KEY_ID=your_access_key
-export AWS_SECRET_ACCESS_KEY=your_secret_key
-export AWS_ENDPOINT=https://hcm04.vstorage.vngcloud.vn:443/
-export S3_BUCKET=your-bucket-name
-export MOUNT_PATH=/workspace/  # Optional, defaults to ~/test/workspace
-```
-
-> **Priority:** Configuration files in `/etc/config-nv/` take precedence over environment variables.
+> **Priority:** Environment variables take precedence over configuration files in `/etc/config-nv/`.
 
 ### 3. Start Using
 
