@@ -202,12 +202,12 @@ func (c *Client) UploadFile(ctx context.Context, localPath string, key string) e
 	contentType := "application/octet-stream"
 
 	// Upload options with 10 concurrent parts for multipart uploads
-	// Using smaller part size (16MB) allows more parallel uploads
+	// PartSize: 0 lets MinIO SDK auto-calculate optimal part size based on file size
 	uploadOpts := minio.PutObjectOptions{
-		ContentType:  contentType,
-		NumThreads:   10,                // 10 concurrent uploads for maximum throughput
-		PartSize:     16 * 1024 * 1024,  // 16MB part size (more parts = better parallelization)
-		SendContentMd5: false,           // Disable MD5 for faster uploads
+		ContentType:    contentType,
+		NumThreads:     10,    // 10 concurrent uploads for maximum throughput
+		PartSize:       0,     // Auto-calculate optimal part size (handles files up to 5TB)
+		SendContentMd5: false, // Disable MD5 for faster uploads
 	}
 
 	// Upload file

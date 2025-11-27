@@ -5,7 +5,7 @@ A fast, efficient command-line tool for managing files between your AI Platform 
 ## Why aiplatform-util?
 
 - **Simple git-like commands** - Familiar `ls`, `pull`, `push` interface
-- **Fast uploads** - 10 parallel threads for files larger than 16MB
+- **Fast uploads** - 10 parallel threads with automatic multipart uploads
 
 ## Quick Start
 
@@ -225,11 +225,11 @@ aiplatform-util nv rm --prefix old-data/ --dry-run
 
 ## Performance Features
 
-- **Automatic multipart uploads** - Files >16MB are split into chunks and uploaded in parallel
+- **Automatic multipart uploads** - Large files are automatically split and uploaded in parallel
 - **10 concurrent threads** - Maximum network throughput for large files
+- **Supports files up to 5TB** - Auto-calculated optimal part size for any file size
 - **Progress tracking** - Real-time progress updates for files >10MB
 - **Smart sync** - Only uploads/downloads files that changed
-- **Optimized for large files** - Efficient handling of GB-sized model files
 
 ## Build from Source
 
